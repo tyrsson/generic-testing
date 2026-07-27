@@ -13,10 +13,22 @@ final class Validator extends AbstractValidator
      *     field: string,
      *     select: string,
      *     table: string,
+     *     valueObscured?: bool,
+     *     translatorEnabled?: bool,
+     *     translatorTextDomain?: string,
+     *     translator?: callable|null,
+     *     messages?: array<string, string>,
      * } $options
      */
     public function __construct(array $options)
     {
-        parent::__construct(...$options);
+        /** @mago-expect analysis:too-few-arguments */
+        parent::__construct(...self::buildConstructorArgs($options));
+    }
+
+    #[\Override]
+    public function isValid($value, $context = null): bool
+    {
+        return true;
     }
 }
